@@ -101,11 +101,11 @@ Button updateData = (Button) findViewById(R.id.update_data);
                 db.update("Book",values,"name = ?",new String[]{
                         "The Da Vinci Code"});
                 }
-            });
-  ```
-  ## 5.删除数据
-  `delete()`方法
-  ```java
+            });
+```
+## 5.删除数据
+ `delete()`方法
+```java
   Button deleteData = (Button) findViewById(R.id.delete_data);
         deleteData.setOnClickListener(new View.OnClickListener(){
 
@@ -115,8 +115,8 @@ Button updateData = (Button) findViewById(R.id.update_data);
                 db.delete("Book","pages > ?",new String[]{"500"});
             }
         });
- ``` 
- ## 6.查找数据
+```
+## 6.查找数据
  ```java
  Button queryData = (Button) findViewById(R.id.query_data);
         queryData.setOnClickListener(new View.OnClickListener(){
@@ -143,22 +143,22 @@ Button updateData = (Button) findViewById(R.id.update_data);
                 cursor.close();
             }
         });
-``` 
+```
 ## 使用SQL操作数据库
 ### 添加数据
 ```java
 db.execSQL("insert into Book (name,author,pages,price) values(?,?,?,?)",
                 new String[] {"The Da Vinci Code","Dan Brown","454","69.56"});
-                ```
- ### 更新数据
+```
+### 更新数据
 ```java       
         db.execSQL("update Book set price = ? where name = ?",new String[]{"10.99","The Da Vinci Code"});
-        ```
+```
 ### 删除数据
 ```java 
         db.execSQL("delete from Book where pages > ?",new String[]{"500"});
-        ```
- ### 查询数据
+```
+### 查询数据
 ```java       
         db.rawQuery("selete * from Book",null);
-        ···
+```
