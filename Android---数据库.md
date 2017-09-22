@@ -7,7 +7,7 @@ SQLiteOpenHelper 是一个抽象类，有两个抽象方法，`onCreate()`和`on
     public static final String CREATE_BOOK = "create table Book ("
 
             +"id integer primary key sutoincrement,"
-            +"author text,"
+           +"author text,"
             +"price real,"
             +"name text)";
  private Context mContext;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
      }
 ```
 ## 2.升级数据库
-`onUpgrade()`方法适用于对数据库进行升级的
+* `onUpgrade()`方法适用于对数据库进行升级的
 ```java
 public static final String CREATE_CATEGORY = "create table Category("
             +"id integer primary key autoincrement,"
@@ -64,7 +64,7 @@ public static final String CREATE_CATEGORY = "create table Category("
 将其中的1换位比1大的数字 `dbHelper = new MyDatabaseHelper(this,"BookStore.db",null,2);`
  
 ### 3.添加数据
-`insert()`方法,接收3个参数，第一个是表名，第二个为null，第三个是一个`ContentValues`对象，提供一个`put()`方法，用于向ContentValues传入对象
+* `insert()`方法,接收3个参数，第一个是表名，第二个为null，第三个是一个`ContentValues`对象，提供一个`put()`方法，用于向ContentValues传入对象
 ```java
 Button addData = (Button) findViewById(R.id.add_data);
         addData.setOnClickListener(new View.OnClickListener(){
@@ -89,7 +89,7 @@ Button addData = (Button) findViewById(R.id.add_data);
         });
 ```
 ## 4.更新数据
-`update()`方法,接收4个参数
+* `update()`方法,接收4个参数
 ```java
 Button updateData = (Button) findViewById(R.id.update_data);
         updateData.setOnClickListener(new View.OnClickListener(){
@@ -104,7 +104,7 @@ Button updateData = (Button) findViewById(R.id.update_data);
             });
 ```
 ## 5.删除数据
- `delete()`方法
+* `delete()`方法
 ```java
   Button deleteData = (Button) findViewById(R.id.delete_data);
         deleteData.setOnClickListener(new View.OnClickListener(){
