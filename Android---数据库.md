@@ -145,20 +145,20 @@ Button updateData = (Button) findViewById(R.id.update_data);
         });
 ```
 ## 使用SQL操作数据库
-### 添加数据
+* ### 添加数据
 ```java
 db.execSQL("insert into Book (name,author,pages,price) values(?,?,?,?)",
                 new String[] {"The Da Vinci Code","Dan Brown","454","69.56"});
 ```
-### 更新数据
+* ### 更新数据
 ```java       
         db.execSQL("update Book set price = ? where name = ?",new String[]{"10.99","The Da Vinci Code"});
 ```
-### 删除数据
+* ### 删除数据
 ```java 
         db.execSQL("delete from Book where pages > ?",new String[]{"500"});
 ```
-### 查询数据
+* ### 查询数据
 ```java       
         db.rawQuery("selete * from Book",null);
 ```
