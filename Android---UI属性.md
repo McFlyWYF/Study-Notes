@@ -11,5 +11,5 @@
 * vertical   垂直
 ### 1.3 android:text属性
 * android:text属性值不是字符串值，而是对字符串资源的引用(将字符串资源包含在string中)
-
- 
+### 1.4FrameLayout属性
+* FrameLayout子视图的位置排列取决于他们各自的`android:layout_gravity`属性
