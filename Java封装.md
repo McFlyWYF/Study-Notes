@@ -1,5 +1,6 @@
 # java封装
 * 通过get和set方法让外界类来获取私有变量
+* 只修改类的内部结构，无需修改其他调用片段
 * People.java
 ```java
 public class People {
