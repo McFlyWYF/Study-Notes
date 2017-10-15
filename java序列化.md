@@ -4,6 +4,7 @@
 * 类 ObjectInputStream 和 ObjectOutputStream 是高层次的数据流，它们包含序列化和反序列化对象的方法。
 ### 序列化，就是将对象写入文件中，反序列化就是从文件中读取数据。序列化writeObject(),反序列化readObject().
 * 检验一个类的实例是否能序列化十分简单， 只需要查看该类有没有实现 java.io.Serializable接口。
+* 如果有一个属性不是可序列化的，则该属性必须注明是短暂的。当对象被序列化时，属性 SSN 的值为 111，但是因为该属性是短暂的，该值没有被发送到输出流。所以反序列化后 Employee 对象的 SSN 属性为 0。
 ## 示例代码
 * Employee.java
 ```java
