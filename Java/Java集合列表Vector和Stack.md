@@ -1,0 +1,2 @@
+### Vector和Stack的定义以及特点
+* Vector是线程安全的动态数组，同时ArrayList继承自AbstractList，并且实现了List，RandomAccess,Cloneable,Serializable接口，内部实现依然基于数组Vector与ArrayList基本是一致的，不同的是Vector是安全的，随机访问速度快，插入和移除性能较差，支持null元素，有顺序，元素可以重复，线程安全。Stack是继承自Vector基于动态数组实现的线程安全栈，Stack是并发安全的后进先出，实现了一些栈基本操作的方法，共同点是使用了方法锁(synchronized)来保证并发安全的。
