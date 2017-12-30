@@ -1,4 +1,4 @@
-### 什么是Deque以及ArrayDequeyuArrayList的区别及特点
+### 什么是Deque以及ArrayDeque与ArrayList的区别及特点
 * Deque是一个双端队列接口，Deque扩展了Queue，有队列的所有方法，还可以看作栈，有栈的基本方法push/pop/peek,还有明确的操作两端的方法 addFirst/removeLast等。
 ```java
 void addFirst(Object e);//将指定元素插入双向队列开头
