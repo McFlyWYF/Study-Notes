@@ -63,3 +63,41 @@
         System.out.println(s6.trim());//去除两端空格
         System.out.println(s1.compareTo(s6));//字符串顺序比较,字符串大于字符串参数返回大于0的数
 ```
+### StringBuffer
+#### 是字符串缓冲区，是一个容器，长度是可变化的。可以操作多个数据类型。最终会通过toString方法转化为字符串。
+* 存储
+ * append()将指定数据作为参数添加到已有数据结尾处。
+ ```java
+        StringBuffer s = new StringBuffer();
+        s.append("abc").append(20);//方法调用链
+        System.out.println(s.toString());
+
+        s.insert(1,"Hello");//在指定位置插入数据
+        System.out.println(s.toString());
+```
+
+* 获取
+```java
+        StringBuffer s2 = new StringBuffer("abcde");//字符串反转
+        s2.reverse();
+        System.out.println(s2);
+
+        char[] ch = new char[4];
+        s2.getChars(1,4,ch,0);//将缓冲区的指定数据赋值给字符数组
+        for (int i = 0;i < ch.length;i++){
+            System.out.println(i +" "+ch[i]);
+        }
+```
+* 删除
+ * delete()删除指定位置的元素
+ ```java
+        s.delete(1,3);//删除指定位置的元素
+        System.out.println(s.toString());
+```
+* 修改
+```java
+        s.setCharAt(2,'E');//修改指定位置的元素
+        System.out.println(s);
+```
+
+#### StringBuffer是线程同步的，StringBuilder是线程不同步的。多线程建议使用StringBuffer,单线程建议使用StringBulider。开发中，建议使用StringBuilder。
