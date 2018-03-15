@@ -100,4 +100,4 @@
         System.out.println(s);
 ```
 
-#### StringBuffer是线程同步的，StringBuilder是线程不同步的。多线程建议使用StringBuffer,单线程建议使用StringBulider。开发中，建议使用StringBuilder。
+#### StringBuffer是线程同步的，StringBuilder是线程不同步的。多线程建议使用StringBuffer,单线程建议使用StringBulider。开发中，建议使用StringBuilder。StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况。 StringBuffer：适用多线程下在字符缓冲区进行大量操作的情况。 StringBuilder：是线程不安全的，而StringBuffer是线程安全的。
