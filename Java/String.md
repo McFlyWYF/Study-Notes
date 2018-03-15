@@ -1,4 +1,3 @@
-
 ## String
 * `String s1 = "abc"`;//s1是一个类类型变量，“abc”就是一个对象，字符串一旦被初始化就不可以被改变。
 * String s1 = "abc";s1 = "bcd";//s1里面的内容没有变，而是s1指向的对象地址改变了。
@@ -38,13 +37,13 @@
         System.out.println(s1.contains("bce"));//判断字符串是否包含某一子串
 ```
 ```java
-        //字符数组转化为字符串
-        char[] arr = {'a','b','c','d'};
-        String s = new String(arr);
-        System.out.println(s);
+//字符数组转化为字符串
+char[] arr = {'a','b','c','d'};
+String s = new String(arr);
+System.out.println(s);
 
-        //将字符串转化为字符数组
-        String ss = "abcde";
-        System.out.println(ss.toCharArray());
+//将字符串转化为字符数组
+String ss = "abcde";
+System.out.println(ss.toCharArray());
 ```
 
