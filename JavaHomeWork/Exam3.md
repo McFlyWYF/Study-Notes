@@ -1,14 +1,13 @@
-### 输入一个1-99999之间的数，输出它的位数，并判断是否是回文数
+## 输入一个1-99999之间的数，输出它的位数，并判断是否是回文数
+
 ```java
 package JavaHomeWork;
-
 import java.util.Scanner;
-
-//输入一个1-99999之间的数，输出它的位数，并判断是否是回文数
 public class Exam3 {
     public static void main(String[] args){
         int j = 0;
         Scanner input =  new Scanner(System.in);
+        System.out.println("请随机输入一个1-99999之间的一个数");
         int n = input.nextInt();
         if (n >= 0 && n <= 99999){
             String s = String.valueOf(n);//将输入的整数转换为字符串
@@ -30,16 +29,99 @@ public class Exam3 {
     }
 }
 ```
-* 结果打印
+
+## 输出200以内的所有奇数
+
+```java
+public class Exam3 {
+    public static void main(String[] args) {
+        int j = 0;
+        for(int i = 0;i < 200;i++) {
+            if (i % 2 != 0) {
+                System.out.print(i + " ");
+                j++;
+            } else if (j % 10 == 0){
+                System.out.println();
+            }
+        }
+    }
+}
 ```
-请随机输入一个1-99999之间的一个数
-12346
-输入数字的位数是: 5
-该数字不是回文数
+
+## 输出下三角的九九乘法表
+
+```java
+public class Exam3 {
+    public static void main(String[] args) {
+        for(int i = 1;i <= 9;i++){
+            for(int j = 1;j <= i;j++){
+                System.out.print(j+"*"+i+"="+j*i+" ");
+            }
+            System.out.println();
+        }
+    }
+}
 ```
+## 
+```java
+public class Exam3 {
+    public static void main(String[] args) {
+        int[][] a = {{0}, {1, 2}, {2, 3, 4}, {3, 4, 5, 6}};
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j <= i; j++) {
+                System.out.print(a[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
 ```
-请随机输入一个1-99999之间的一个数
-34643
-输入数字的位数是: 5
-该数字是回文数
+
+## 求最大值，最小值，平均值，和
+```java
+public class Exam3 {
+    public static void main(String[] args) {
+        int[] a = new int[10];
+        for (int i = 0; i < 10; i++) {
+            Scanner input = new Scanner(System.in);
+            a[i] = input.nextInt();
+        }
+
+        int max = a[0];
+        int min = a[0];
+        int sum = 0;
+        int average = 0;
+
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] > max) {                      //求最大值
+                max = a[i];
+            }
+            if (a[i] < min) {                     //求最小值
+                min = a[i];
+            }
+            sum = sum + a[i];                    //求和
+        }
+        average = sum / 10;
+        System.out.println("最大值是: " + max + " 最小值是: " + min + " 平均值是: " + average + " 所有元素和为: " + sum);
+    }
+}
+```
+
+## 打印字母正三角形
+
+```java
+public class Exam3 {
+    public static void main(String[] args) {
+
+        for (int i = 1,x = 0; i <= 7; i++,x++) {
+            for (int j = 7 - i; j >= 0; j--) {
+                System.out.print("  ");
+            }
+            for (int k = 1; k <= 2 * i - 1; k++) {
+                System.out.print((char) ('A' + x) + " ");
+            }
+            System.out.println();
+        }
+    }
+}
 ```
