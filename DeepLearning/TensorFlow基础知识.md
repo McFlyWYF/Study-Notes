@@ -1,3 +1,4 @@
+```Python
 import tensorflow as tf
 import numpy as np
 
@@ -115,3 +116,88 @@ with tf.Session() as sess:
     for a in range(5):
         sess.run(update)                  # 更新 state,并打印 state
         print(sess.run(state))
+```
+## 使用神经网络解决分类问题的基本步骤
+* 提取问题中实体的特征向量作为神经网络的输入
+* 定义神经网络的结构，并定义如何从神经网络输入得到输出
+* 通过训练数据来调整神经网络参数的值
+* 使用训练好的神经网络来预测未知的数据
+
+## 前向传播算法
+* 神经网络的前向传播算法需要三部分信息：
+ * 第一部分是神经网络的输入
+ * 第二部分是神经网络的连接结构
+ * 第三部分是每个神经元的参数
+
+* 例如：如图所示
+
+![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/35.png)
+
+* 首先，这个神经网络有三层，输入层，隐藏层，输出层。输入层有x1,x2，隐藏层是a11,a12,a13。输出层是y。
+* 首先，我们可以计算出隐藏层三个节点的值，a11 = w11*x1 + w21*x2,a12 = w12*x1 + w22*x2,a13 =  w13*x1 + w23*x2。然后再次通过类似方法，计算出y的值。y = a11 * w11 + a12 * w21 + a13 * w31,得到y的值，也就是输出值。
+* 当然，向前传播算法可以用矩阵来实现。将输入 x1,x2看做是1x2的矩阵，w看做是2x3的矩阵。将隐藏层的三个节点可以看做是向量x和w乘积的取值。
+* 使用代码实现是很容易理解的
+```Python
+a = tf.matmul(x,w1)
+y = tf.matmul(a,w2)
+```
+* 权重声明
+```Python
+weight = tf.Variable(tf.random_normal([2,3],stddev=2))#stddev是指标准差为2
+```
+
+```
+#随机数生成函数
+
+tf.random_normal  正态分布
+tf.truncated_normal  正态分布,偏离平均值超过2个，重新随机分配
+tf.random_uniform  平均分布
+tf.random_gamma  Gamma分布
+
+
+#常数生成函数
+
+tf.zeros  全0数组
+tf.ones   全1数组
+tf.fill([2,3],9)   全部为给定数字9的数组
+tf.constant([1,2,3])   给定值1,2,3的常量
+```
+* 偏置项通常会使用常数来设置初始值
+```Python
+biases = tf.Variable(tf.zeros([3]))
+```
+* 前向传播算法的代码实现
+
+```Python
+#前向传播算法
+import tensorflow as tf
+#声明两个变量
+w1 = tf.Variable(tf.random_normal([2,3],stddev=1,seed=1))
+w2 = tf.Variable(tf.random_normal([3,1],stddev=1,seed=1))
+
+#暂时将输入特征向量定义为一个常量，x是一个1x2的矩阵
+x = tf.constant([[0.7,0.9]])
+
+a = tf.matmul(x,w1)
+y = tf.matmul(a,w2)
+
+
+sess = tf.Session()
+
+#sess.run(w1.initializer)#初始化w1
+#sess.run(w2.initializer)#初始化w2
+
+#初始化的改进方法
+init_op  = tf.global_variables_initializer()
+sess.run(init_op)
+print(sess.run(y))
+print(tf.all_variables())
+sess.close()
+```
+
+* 凡是定义过的变量，在使用之前，必须要进行初始化操作`init_op  = tf.global_variables_initia
+lizer()`
+#### Tensorflow的重要属性
+* 张量tensor  维度shape   类型type
+* 变量的类型是不可改变的，一旦构建之后，类型就不能再改变了
+* 维度在运行时是有可能改变的，但是需要通过设置参数validate_shape = False。
