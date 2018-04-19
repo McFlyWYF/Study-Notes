@@ -201,3 +201,42 @@ lizer()`
 * 张量tensor  维度shape   类型type
 * 变量的类型是不可改变的，一旦构建之后，类型就不能再改变了
 * 维度在运行时是有可能改变的，但是需要通过设置参数validate_shape = False。
+
+### 常用的非线性激活函数
+* ReLU函数：
+ * f(x) = max(x,0)
+![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/37.png)
+
+* sigmoid函数
+ * f(x) = 1/1+e(-x)
+ ![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/38.png)
+
+* Tanh函数
+ * f(x) = [1-e(-2x)]/[1+e(-2x)]
+ ![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/39.png)
+
+### 分类问题
+* 一共有7种不同的非线性激活函数，常见的有 `tf.nn.relu`,`tf.sigmoid`,`tf.tanh`
+* 常用的损失函数是交叉熵 `y = - 求和(-p * log(q))`，它刻画的是预测值概率和正确值概率之间的距离。p代表的是正确答案，q代表的是预测值。
+* softmax 函数是将输出结果变为概率分布，用概率的形式来表示输出值。
+
+### 回归问题
+* 回归问题，解决的是对具体数值的预测，输出的是一个任意实数。对于回归问题，最常用的损失函数是均方误差。
+```
+mes = (求和(y_ - y)^2)/n
+```
+* 代码形式实现均方误差损失函数
+```Python
+mes = tf.reduce_mean(tf.square(y_ - y))//这里的减号也是对应元素相减
+```
+
+### 自定义损失函数
+* 比如：预测商品销量时，少预测一个少挣10元，多预测一个少挣1元，将利润与损失函数相联系。
+* 使用代码实现这个损失函数
+```Python
+loss = tf.reduce_sum(tf.select(tf.greater(v1,v2),(v1 - v2) * a,(v2 - v1) * b))
+```
+* tf.greater的输入是两个张量，此函数会比较这两个张量中每一个元素的大小，并返回比较结果。当tf.greater的输入张量维度不一样时，会进行类似numpy的广播操作处理。tf.select有三个参数，第一个为选择条件依据，当选择条件为true时，tf.select函数会选择第二个参数中的值，否则使用第三个参数的值。
+* tf.select 和 tf.greater 函数的用法
+```Python
+import
