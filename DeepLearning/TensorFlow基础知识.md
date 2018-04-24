@@ -237,6 +237,121 @@ mes = tf.reduce_mean(tf.square(y_ - y))//这里的减号也是对应元素相减
 loss = tf.reduce_sum(tf.select(tf.greater(v1,v2),(v1 - v2) * a,(v2 - v1) * b))
 ```
 * tf.greater的输入是两个张量，此函数会比较这两个张量中每一个元素的大小，并返回比较结果。当tf.greater的输入张量维度不一样时，会进行类似numpy的广播操作处理。tf.select有三个参数，第一个为选择条件依据，当选择条件为true时，tf.select函数会选择第二个参数中的值，否则使用第三个参数的值。
-* tf.select 和 tf.greater 函数的用法
+* tf.where 和 tf.greater 函数的用法
+
 ```Python
-import
+# tf.where 和 tf.greater 的用法
+v1 = tf.constant([1.0, 2.0, 3.0, 4.0])
+v2 = tf.constant([4.0, 5.0, 2.0, 7.0])
+
+sess = tf.InteractiveSession()
+print(tf.greater(v1, v2).eval()) //判断v1,v2的大小，返回的是布尔值
+
+print(tf.where(tf.greater(v1, v2), v1, v2).eval())//结果为true时，返回的是第一个结果的值，否则返回第二个值
+sess.close()
+```
+
+### 神经网络训练过程
+```Python
+batch_size = n
+
+#每次读取一小部分数据作为当前的训练数据来执行反向传播算法
+x = tf.placeholder(tf.float32,shape=(batch_size,2),name='x-input')
+y_ = tf.placeholder(tf.float32,shape=(batch_size,1),name='y-input')
+
+#定义神经网络结构和优化算法
+loss =
+train_step = tf.train.AdamOptimizer(0.01).minimize(loss)
+
+#训练神经网络
+with tf.Session() as sess:
+    #参数初始化
+    #迭代的更新参数
+    for i in range(steps):
+        #准备好batch_size个训练数据
+    current_X,current_Y =
+    sess.run(train_step,feed_dict={x:current_X,y_:current_Y})
+```
+
+### 学习率优化算法
+* tf.train.exponential_decay() 函数
+
+```Python
+# tf.train.exponential_decay()  指数衰减学习率，当参数 staircase 是false时，为指数衰减，是true时，为阶梯状衰减
+#代码实现
+global_step = tf.Variable(0)
+
+#通过exponential_decay 函数生成学习率
+learning_rate = tf.train.exponential_decay(0.1,global_step,100,0.96,staircase=True)
+#各个参数的意义； 1.基础学习率，2.更新次数 3.衰减速度 4.衰减率
+
+#使用指数衰减的学习率，在minimize函数中传入global_step 将自动更新global_step 参数，从而使得学习率得到更新
+learning_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss,global_step = global_step)
+```
+### 过拟合问题
+* 过拟合问题就是对模型的特征学习太多，不能适用于其他数据，以致于将物体识别错误
+。
+* 为了避免过拟合问题，常用方法是正则化。正则化的思想是在损失函数中加入刻画模型复杂程度的指标，优化的是损失函数 + (lambda)复杂度函数
+* 常用刻画模型复杂程度的函数有两种，一种是L1正则化，公式是R(w) = ||w|| = 求和|w|，一种是L2正则化，公式是R(w) = ||w||^2 = 求和 |w^2|。还可以将L1和L2同时使用 R(w) = 求和a|w| + (1-a)w^2。
+* 使用正则化L2
+```Python
+loss = tf.reduce_mean(tf.square(y_ - y)) + tf.contrib.layers.l2_regularizer(lambda)(w)
+```
+* 使用L1，L2
+```Python
+weights = tf.constant([[1.0,-2.0],[-3.0,4.0]])
+with tf.Session() as sess:
+    print(sess.run(tf.contrib.layers.l1_regularizer(.5)(weights)))//L1
+    print(sess.run(tf.contrib.layers.l2_regularizer(.5)(weights)))//L2
+```
+
+### 滑动平均模型
+* 使用 tf,train,ExponentialMovingAverage 来实现滑动平均模型。使用时，这个函数提供一个衰减率，将用于控制模型更新的速度。此函数还提供num_updates参数来动态设置衰减率的大小。
+* 公式是 `shadow_variable = decay x shadow_variable + (1 - decay) x Variable`
+
+### 模型持久化
+* 保存已经训练好的模型
+
+```Python
+v1 = tf.Variable(tf.constant(1.0,shape=[1]),name="v1")
+v2 = tf.Variable(tf.constant(2.0,shape=[1]),name="v2")
+result = v1 + v2
+
+init_op = tf.global_variables_initializer()
+
+#声明tf,train.Saver类用于保存模型
+saver = tf.train.Saver()
+
+with tf.Session() as sess:
+    sess.run(init_op)
+    saver.save(sess,"E:\MachineLearning/model/model.ckpt")
+```
+
+* 加载已经保存的模型
+
+```Python
+v3 = tf.Variable(tf.constant(1.0,shape=[1]),name="v3")
+v4 = tf.Variable(tf.constant(2.0,shape=[1]),name="v4")
+
+saver = tf.train.import_meta_graph("E:\MachineLearning\model\model.ckpt.meta")
+
+with tf.Session() as sess:
+    saver.restore(sess,"E:\MachineLearning\model\model.ckpt")
+    #通过张量的名称来获取张量
+    print(sess.run(tf.get_default_graph().get_tensor_by_name("add:0")))
+```
+
+* 保存或加载部分变量
+```Python
+tf.train.Saver([v1])//只加载或保存变量v1
+```
+
+### 持久化原理及数据格式
+##### meta_info_def属性
+* meta_info_def 是通过MetaInfoDef定义的，记录了计算图中的元数据以及所有用到的运算方法的信息。
+`stripped_op_list`定义了所有要用到的计算方法，它是一个列表。
+
+##### graph_def属性
+* graph_def 记录了计算图上的节点的信息，每一个节点对应了一个运算，只关注运算的连接结构。
+
+##### saver_def属性
