@@ -1,4 +1,4 @@
-# OpenCv在Python中的使用
+# OpenCv使用Python实现
 ## 图像的读取和写入
 ```python
 #读入图像
@@ -13,7 +13,7 @@ cv2.imwrite('E:\MachineLearning\image\img3.png',img)
 ```
 * 原图
 
-![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/44.png)
+![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/img44.png)
 ## 显示图像和结果
 ```python
 #添加字体支持
@@ -54,11 +54,11 @@ show()
 ```
 * 灰度图
 
-![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/40.png)
+![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/img40.png)
 
 * 积分图
 
-![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/43.png)
+![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/img43.png)
 
 # 从种子像素开始应用泛洪(漫水)填充
 ```python
@@ -104,7 +104,7 @@ cv2.imwrite('E:\MachineLearning\image\img11.jpg',img)
 ```
 * 泛洪图
 
-![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/41.png)
+![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/img41.png)
 
 
 # 提取图像的SURF(加速稳健特征)特征
@@ -140,7 +140,7 @@ cv2.imwrite('E:\MachineLearning\image\img12.jpg',vis)
 ```
 * 特征提取图
 
-![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/42.png)
+![Image Text](https://raw.github.com/wangyufei1006/Java-Design-patterns/master/Image/img42.png)
 
 # 视频处理
 ```python
