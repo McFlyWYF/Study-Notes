@@ -19,9 +19,8 @@
 * 距离计算方法：
 
   * 欧氏距离：
-    $$
-    d = sqrt(∑ (xi-yi)^2 )
-    $$
+
+    <img src="http://latex.codecogs.com/gif.latex?d=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}" title="d=\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}" />
 
     * x，y：两个样本
     * n：维度
@@ -29,9 +28,7 @@
 
   * 曼哈顿距离：
 
-$$
-d = sqrt(∑ |xi-yi| )
-$$
+    <img src="http://latex.codecogs.com/gif.latex?d=\sqrt{\sum_{i=1}^{n}|x_i-y_i|}" title="d=\sqrt{\sum_{i=1}^{n}|x_i-y_i|}" />
 
 * K近邻模型的三个基本要素：距离度量，K值的选择，分类决策规则。
 
@@ -57,22 +54,22 @@ $$
                 "夜孔雀": [9, 39, 8, "爱情片"],
                 "代理情人": [9, 38, 2, "爱情片"],
                 "新步步惊心": [8, 34, 17, "爱情片"]}
-  
+
   x = [23,3,17]
   KNN = []
   for key,v in movie_data.items():
       d = math.sqrt((x[0] - v[0]) **2 + (x[1] - v[1]) **2 + (x[2] - v[2]) **2)
       KNN.append([key,round(d,2)])
   print(KNN)
-  
+
   KNN.sort(key=lambda dis : dis[1])
-  
+
   print(KNN)
-  
+
   #这里K取5
   KNN = KNN[:5]
   print(KNN)
-  
+
   labels = {"喜剧片":0,"动作片":0,"爱情片":0}
   for s in KNN:
       label = movie_data[s[0]]
