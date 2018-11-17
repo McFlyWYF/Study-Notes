@@ -11,6 +11,7 @@ def fun(x):
 
 start = time.time()
 list = []  # 存储mid
+list_acc = []#存储误差
 flag = True
 while (flag):
     a = float(input('请输入左端点值:'))
@@ -35,8 +36,10 @@ while (flag):
             else:
                 mid = (a + b) / 2  # 找到二者的中点
                 list.append(mid)
+                list_acc.append(abs(b - a))
                 if abs(b - a) < accuracy:  # 满足最小精度值
-                    print(mid)
+                    
+                    print('零点坐标为:',mid)
                     print('迭代次数为：', k)
 
                     flag = False
@@ -53,6 +56,7 @@ print('运行时间为:',end - start)
 
 # 绘制函数图像
 
+plt.subplot(121)
 x = np.arange(-2, 3, 0.1)
 y = x * x * x - x - 1
 y1 = 0
@@ -64,4 +68,8 @@ plt.scatter(mid, 0, c='y')  # 零点
 
 for x in list:
     plt.scatter(x, 0, c='r')  # 每次迭代的点
+    
+#误差曲线
+plt.subplot(122)
+plt.plot(list_acc)
 plt.show()
