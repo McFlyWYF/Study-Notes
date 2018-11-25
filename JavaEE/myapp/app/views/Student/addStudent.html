@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="container" style="width: 1700px">
+
+    <div id="header" style="background-color:#FFA500; text-align: center;">
+        <h1 style="margin-bottom:0;">学生管理系统</h1></div>
+    <form action="@{Student.information()}" method="post" name="addStudent">
+    <div id="menu" style="background-color: #dddddd;height:800px;width:1700px;float:left;text-align: center;">
+        <br><br>
+
+        <table border="1" cellpadding="10" cellspacing="1" style="width: 25%; height: 40%; margin: auto">
+            <tr>
+                <th>学号</th>
+                <td><input type="text" name="number" style=" width:200px; height: 30px"></td>
+            </tr>
+
+            <tr>
+                <th>姓名</th>
+                <td><input type="text" name="name" style=" width:200px; height: 30px"></td>
+            </tr>
+            <tr>
+                <th>性别</th>
+                <td><input type="text" name="sex" style=" width:200px; height: 30px"></td>
+            </tr>
+            <tr>
+                <th>班级</th>
+                <td><input type="text" name="classId" style=" width:200px; height: 30px"></td>
+            </tr>
+            <tr>
+                <th>学院</th>
+                <td><input type="text" name="college" style=" width:200px; height: 30px"></td>
+            </tr>
+        </table>
+        </form>
+
+        <br><br><input type="submit" style="text-align: center;height: 30px;width: 100px" value="确定">
+        <a href="showStudent"> <input type="button" style="text-align: center;height: 30px;width: 100px" value="返回"></a>
+    </div>
+</div>
+</body>
+</html>
