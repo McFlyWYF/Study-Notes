@@ -28,6 +28,8 @@ def Secant(xstart,x_old):
 
     while flag:
         xi = xstart
+        if k!=1:
+            x_old = list_xstart[-1]
         xii = xi - (f(xi) * (x_old - xi)) / (f(x_old) - f(xi))
         list_xstart.append(xi)
         list_loss.append(abs(xii - xi) / xii)
