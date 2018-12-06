@@ -25,7 +25,7 @@ def NewtonInter(x, y):
     return a
 
 
-a = Newton(x, y)
+a = NewtonInter(x, y)
 
 bb = []
 for i in range(0, len(x)):
