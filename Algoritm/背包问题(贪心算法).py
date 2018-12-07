@@ -1,10 +1,10 @@
-vv_ww = ((0,1),(2,1),(5,3),(3,2),(10,6),(4,2))
+vv_ww = ((1,6),(5,1),(3,6),(10,6),(3,7))
 
 v_w = []
 v = []
 w = []
 
-for i in range(6):
+for i in range(5):
     v_w.append(round((vv_ww[i][0] / vv_ww[i][1]),2))
 
 print(v_w)
@@ -17,16 +17,17 @@ def combine(outputList, sortList):
     return CombineList;
 
 
-value = [0,2,5,3,10,4]
-weights = [1,1,3,2,6,2]
+values = [1, 5, 3, 10, 3]
+weights = [6, 1, 6, 6, 7]
 
-index = [0,1,2,3,4,5];
+
+index = [0,1,2,3,4];
 index_i = []
 p = combine(v_w, index);
 print(p)
 p.sort(key=lambda x: x[1], reverse=True);
 print(p)
-for i in range(6):
+for i in range(5):
     index_i.append(p[i][0])
 
 max_weights = 12

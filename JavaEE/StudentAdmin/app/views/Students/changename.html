@@ -1,0 +1,24 @@
+#{extends 'CRUD/layout.html' /}
+<h1>&{'student_change_name.title'} ${student}</h1>
+
+#{if flash.error} 
+<p style="color:#c00"> ${flash.error} </p> 
+#{/if} 
+
+#{form @doModifyName(), enctype:'multipart/form-data'}
+
+<div class="crudField crud_student" hidden>
+        <label for="studentid">&{'student_change_name.id'}</label>
+        <input id="studentid" type="hidden" name="object.id" value="${object.id}" /> 
+        <span class="crudHelp"></span>
+</div>
+<div class="crudField crud_student">
+        <label for="studentname">&{'student_change_name.name'}</label>
+        <input id="studentname" type="text" name="object.name" value="${object.name}" /> 
+        <span class="crudHelp"></span>
+</div>
+   
+        <p class="buttons">
+                    <input type="submit" name="_save" value="&{'student_change_name.save'}" />
+            </p>
+#{/form} 
