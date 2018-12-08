@@ -1,9 +1,13 @@
 package controllers;
 
+import models.User;
+
 public class Security extends Secure.Security {
 
-    static boolean authenticate(String username,String password){
-        boolean ret = username != null && password != null && username.equals("root") && password.equals("12345") || username.equals("stu") && password.equals("123");
+    static boolean authenticate(int username,int password){
+
+        User user = new User(username,password);
+        boolean ret = (username == user.account) && (password == user.password);
 
         session.put("currentUser",username);
         return ret;
