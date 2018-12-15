@@ -18,3 +18,4 @@ GET     /public/                                staticDir:public
 
 *        /                                        module:secure
 *        /register                                Application.users
+*        /TeaRes                                  Application.TeacherRes

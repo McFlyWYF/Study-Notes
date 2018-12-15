@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+#{form @Application.TeacherRes(),enctype :'multipart/form-data'}
+
+    <label>用户名</label>
+    <input id="account" type="number" name="account" value="${account}">
+    <label>密码</label>
+    <input id="password" type="password" name="password" value="${password}">
+<div>
+    <a href="@{registerSucc()}"></a>
+    <input id="register" type="submit" name="save" value="注册" >
+</div>
+
+#{/form}
+</body>
+</html>

@@ -8,11 +8,11 @@
 
 <h3>随机生成班级学生登录账号及密码</h3>
 
-
+#{form @Application.registerSucc()}
     <a href="@{registerSucc()}"></a>
     <label>请输入班级人数</label>
-    <input id="classnumber" type="text">
+    <input id="classnumber" type="text" name="classnumber" value="${classnumber}">
     <input id="register" type="button" onclick="location.href='@{registerSucc()}'" value="注册">
-
+#{/form}
 </body>
 </html>

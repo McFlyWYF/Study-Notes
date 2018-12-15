@@ -21,13 +21,14 @@ public class Application extends Controller {
 
     }
 
-    public static void registerSucc() {
+    public static void registerSucc(int classnumber) {
         int account = 0;
         int password = 0;
 
         int acc = 0;
         acc = 1607094101;
-        for (int i = 0; i < 58; i++) {
+        System.out.println(classnumber);
+        for (int i = 0; i < classnumber; i++) {
             account = acc;
 
             acc = acc + 1;
@@ -38,8 +39,14 @@ public class Application extends Controller {
             user.save();
         }
 
-        render(account,password);
+        render();
+    }
 
+    public static void TeacherRes(int account,int password){
+        User user = new User(account,password);
+        user.save();
+
+        render();
     }
 
 }
