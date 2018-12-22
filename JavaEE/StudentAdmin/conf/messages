@@ -1,0 +1,28 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+
+nameString = 姓名
+name = 姓名
+email = 电子邮件
+address = 地址 
+Student = 学生
+myTeacher = 班主任
+crud.save = 保存
+crud.saveAndContinue = 保存并继续
+crud.saveAndAddAnother = 保存并新建
+
+
+student_change_name.title = 修改学生姓名
+
+student_change_name.save = 保存222
+
+
+Students.actions = 各种操作
+
+student.modify_name = 改名
+
+
+menu.logout = 登出
+
+menu.login = 登陆

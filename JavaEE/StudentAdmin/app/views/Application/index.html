@@ -1,0 +1,15 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{if session.get("username")}     
+	欢迎: ${user} ！
+	<div id="logout"><p><a href=@{Secure.logout()}>
+    	${session.get("username")} &{"menu.logout"}
+	</a></p></div>
+#{/if}
+#{else}
+	未登录，请登录！
+	<div id="login">
+		<p><a href=@{Secure.login()}> &{"menu.login"}
+	</a></p></div>
+#{/else}
