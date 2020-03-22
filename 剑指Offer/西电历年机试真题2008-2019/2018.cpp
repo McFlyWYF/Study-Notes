@@ -78,3 +78,77 @@ int main()
 	}
 	return 0;
 }
+
+//2018-C
+#include<iostream>
+#include<set>
+#include<utility>	//pair 
+using namespace std;
+set<pair<int,int> > pot;	//pair将一对值组合成一个值 ,set中的元素不允许 复 
+int main()
+{
+	int n,x1,x2,y1,y2;
+	cin>>n;
+	for(int i = 0;i < n;i++){
+		cin>>x1>>y1>>x2>>y2;
+		for(int i = x1;i < x2;i++){
+			for(int j = y1;j < y2;j++){
+				pot.insert(make_pair(i,j));	// 以i和j的值创建一个新的pair对象，
+											//其元素类型分别是i和j的类型。
+			}
+		}
+	}
+	
+	cout<<pot.size()<<endl;
+	return 0;	
+}
+
+//2018-D 
+#include<iostream>
+#include<string>
+using namespace std;
+
+typedef struct{
+	string date;
+	int grade;
+}student;
+
+int main()
+{
+	int n;
+	cin>>n;
+	string date;
+	int grade;
+
+	student s1[n];
+	
+	//输出数据 
+	for(int i = 0;i < n;i++){
+		cin>>date;
+		cin>>grade;
+
+		s1[i].date = date;
+		s1[i].grade = grade;
+	}
+
+	//冒泡排序  
+	for(int i = 0;i < n;i++){
+		for(int j = 0;j < n - i - 1;j++){
+			if(s1[j].grade < s1[j+1].grade){	//成绩按从大到小排序 
+				swap(s1[j].grade,s1[j+1].grade);
+				swap(s1[j].date,s1[j+1].date);
+			}
+			
+			if(s1[j].grade == s1[j+1].grade){		//成绩相等，按日期从小到大排序 
+				if(s1[j].date.compare(s1[j+1].date) == 1){
+					swap(s1[j].date,s1[j+1].date);
+				}
+			}
+		}
+	}
+	//打印 
+	for(int i = 0;i < n;i++){
+		cout<<s1[i].date<<" "<<s1[i].grade<<endl;
+	}
+	return 0;
+}
