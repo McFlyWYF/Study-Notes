@@ -1,0 +1,89 @@
+//2019-09-1
+#include<iostream>
+using namespace std;
+
+//标准答案
+int N,M;
+int T,K,P;
+
+int main()
+{
+	int num;		//疏果个数
+	int maxnum = 0;		//最大疏果个数
+	cin>>N>>M;
+	
+	for(int i = 0;i < N;i++){
+		P = 0;
+		
+		cin>>num;		//疏果前的个数
+		T += num;
+		
+		for(int j = 1;j <= M;j++){
+			cin>>num;
+			T += num;	
+			P -= num; 		//疏果个数 
+		} 
+		
+		if(P > maxnum){
+			maxnum = P;
+			K = i + 1;
+		}
+	} 
+	
+	cout<<T<<" "<<K<<" "<<maxnum<<endl; 
+	return 0;
+}
+
+/*
+//2019-09-2
+#include<iostream>
+using namespace std;
+
+const int MAX = 1002;
+bool has[MAX];	//has[i]=true,第i+1棵树上有掉落
+
+int N;
+int T,D,E;
+ 
+int main()
+{
+	int m;		//每行操作个数 
+	int d;		//操作记录 
+	cin>>N;		//树的个数
+	for(int i = 0;i < N;i++){
+		cin>>m;
+		
+		int s = 0;		//第i棵树的苹果总数
+		
+		T += s;		//这里的T为上一棵树的总数 
+		for(int j = 0;j < m;j++){
+			cin>>d;
+			if(d < 0){
+				s += d;
+				T += d;
+			}
+			
+			if(d > 0){
+				if(s > d && has[i] == false){		//有掉落，并且之前未发生过掉落 
+					has[i] = true;
+					D++;
+				}
+				
+				T -= (s - d);
+				s = d;		//重新统计该树上的苹果总数 
+			}
+		} 
+	}
+	
+	//统计组数
+	for(int i = 0;i < N;i++){
+		if(has[i] && has[(i + 1) % N] && has[(i + 2) % N]){
+			E++;
+		}
+	} 
+	
+	cout<<T<<" "<<D<<" "<<E<<endl;
+	
+	return 0;
+} 
+*/

@@ -1,0 +1,114 @@
+/*
+//2018-12-1
+#include<iostream>
+using namespace std;
+int main()
+{
+	int r,y,g;
+	cin>>r>>y>>g;
+	
+	int n;
+	cin>>n;
+	
+	int k,t;
+	
+	int sum = 0;
+	
+	for(int i = 0;i < n;i++){
+		cin>>k>>t;
+		if(k == 0){
+			sum += t;
+		}
+		
+		if(k == 1){
+			sum += t;
+		}
+		
+		if(k == 2){
+			sum = sum + t + r;
+		}
+		
+		if(k == 3){
+			sum += 0;
+		}
+	}
+	
+	cout<<sum<<endl;
+	return 0;
+}
+*/
+
+/*
+//2018-12-2
+#include<iostream>
+using namespace std;
+typedef long long LL;
+
+int r,y,g;
+int n;
+int k,t;
+LL ans = 0;
+
+int judge(LL tt){	//判断tt时刻该出的红绿灯 
+	//红灯 
+	if(tt >= 0 && tt < r){
+		return 1;
+	}
+	//黄灯 
+	if(tt >= r + g && tt < r + g + y){
+		return 2;
+	}
+	//绿灯 
+	if(tt >= r && tt <= r + g){
+		return 3;
+	}
+} 
+
+int main()
+{
+	cin>>r>>y>>g;
+	cin>>n;
+	for(LL i = 0;i < n;i++){
+		cin>>k>>t;
+		if(k == 0){
+			ans += t;
+		}
+		
+		else if(k == 1){	//刚开始是红灯，判断此时是什么灯 
+			LL tt = r - t; 
+			tt = (tt + ans) % (r + y + g);
+			int flag = judge(tt);
+			if(flag == 1){	//红灯 
+				ans = ans + r - tt;
+			}else if(flag == 2){
+				ans = ans + r + y + g - tt + r;
+			}
+		}
+		
+		else if(k == 2){	//开始是黄灯 
+			LL tt = r + g + y - t;
+			tt = (tt + ans) % (r + y + g);
+			int flag = judge(tt);
+			if(flag == 1){	//		红灯
+				ans = ans + r -tt; 
+			}else if(flag == 2){
+				ans = ans + r + y + g - tt + r;
+			}
+		}
+		
+		else if(k == 3){	//开始是绿灯 
+			LL tt = r + g - t;
+			tt = (tt + ans) % (r + g + y);
+			int flag = judge(tt);
+			if(flag == 1){
+				ans = ans + r -tt;
+			}else if(flag == 2){
+				ans = ans + r + y + g - tt + r;
+			} 
+		}
+	}
+	
+	cout<<ans<<endl;
+	return 0;
+}
+*/

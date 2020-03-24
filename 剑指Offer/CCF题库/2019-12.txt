@@ -1,0 +1,102 @@
+//2019-12-1
+#include<iostream>
+using namespace std;
+int a[4];
+int n;
+bool judge(int n)
+{
+	int t = 0;
+	while(n && t != 7){
+		t = n % 10;
+		n = n / 10;
+	}
+	
+	if(t == 7){
+		return true;
+	}
+	return false;
+}
+
+int main()
+{
+	int count = 0;
+	int k = 1,turn = 0;
+	cin>>n;		//报数次数  
+	
+	while(count < n){
+
+		if(k % 7 == 0 || judge(k)){		//是否是7的倍数或包含数字7 
+			a[turn]++;		//跳过次数加1 
+		}else{
+			count++;		//报数次数+1 
+		}
+		turn = (turn + 1) % 4;	//移到下一人 
+		k++;	//报数数字加1 
+	}
+	
+	for(int i = 0;i < 4;i++){
+		cout<<a[i]<<endl;
+	}
+	return 0;
+}
+
+
+//2019-12-2
+#include<iostream>
+#include<set>
+using namespace std;
+
+struct Point{
+	int x;
+	int y;
+	Point(int _x,int _y): x(_x),y(_y){}
+	
+	bool operator < (const Point &rhs) const {
+		if(x == rhs.x){
+			return y  < rhs.y;
+		}
+		
+		return x < rhs.x;
+	}
+};
+int n;
+int ans[5];
+set<Point> pts;
+
+bool find(int x,int y){
+	if(pts.find(Point(x,y)) != pts.end()){
+		return true;
+	}
+	
+	return false;
+}
+
+int main()
+{
+	cin>>n;
+	int x,y;
+	for(int i = 0;i < n;++i){
+		cin>>x>>y;
+		pts.insert(Point(x,y));
+	}
+	
+	set<Point>::iterator it;
+	for(it = pts.begin();it != pts.end();it++){
+		x = (*it).x;
+		y = (*it).y;
+		
+		if(find(x,y + 1) && find(x,y - 1) && find(x + 1,y) && find(x - 1,y)){
+			int cnt = 0;
+			if(find(x - 1,y + 1)) cnt++;
+			if(find(x + 1,y + 1)) cnt++;
+			if(find(x - 1,y - 1)) cnt++;
+			if(find(x + 1,y - 1)) cnt++;
+			ans[cnt]++;
+		}
+	}
+	
+	for(int i = 0;i < 5;++i){
+		cout<<ans[i]<<endl;
+	}
+	return 0;
+}

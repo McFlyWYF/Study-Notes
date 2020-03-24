@@ -1,0 +1,125 @@
+/*
+//2019-03-1
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n,m;
+	double middle;//中位数 
+	cin>>n;
+	int a[n];
+	
+		for(int i = 0;i < n;i++){
+			cin>>a[i];
+		}
+		
+		//求最大值、最小值 
+		int max = a[0],min = a[0];
+		for(int i = 1;i < n;i++){
+			if(max < a[i]){
+				max = a[i];
+			}
+			
+			if(min > a[i]){
+				min = a[i];
+			}
+		}
+		
+		//如果是奇数，中位是直接取 
+		if(n % 2 != 0){
+			middle = a[n / 2];
+		}
+		
+		//如果是偶数，取中间的2位算术平均 
+		if(n % 2 == 0){
+			middle = (a[n / 2 - 1] + a[n / 2]) * 1.0 / 2;
+		}
+		 
+		if(middle - (int)middle > 0){		//小数 
+			printf("%d %.1f %d",max,middle,min);
+		}
+		else{
+			cout<<max<<" "<<(int)middle<<" "<<min<<endl;	//整数 
+		}
+	
+	return 0;
+}
+*/
+
+/*
+//2019-03-2
+#include<iostream>
+#include<cstring>
+#include<stack>
+using namespace std;
+
+int n;
+char str[10];
+
+stack<int> num;
+stack<char> sign;
+	
+int main()
+{
+	cin>>n;
+	getchar();
+	
+	for(int i = 0;i < n;i++){
+		gets(str);
+			while(!num.empty()) num.pop();	//清空栈
+			while(!sign.empty()) sign.pop();
+			
+			int j = 0;
+			while(j < strlen(str)){
+				if(str[j] > '0' && str[j] <= '9'){
+					num.push(str[j] - '0');
+				}
+				else{
+					if(str[j] == '+'){
+						sign.push('+');
+					}
+					
+					else if(str[j] == '-'){		//减法转换成加法 
+						num.push((str[j + 1] - '0') * (-1));
+						sign.push('+');
+						j++;
+					}
+					
+					else if(str[j] = 'x'){
+						int lhs = num.top();
+						num.pop();
+						num.push(lhs * (str[j+1] - '0'));
+						j++;
+					}
+					
+					else if(str[j] == '/'){
+						int lhs = num.top();
+						num.pop();
+						num.push(lhs / (str[j + 1] - '0'));
+						j++;
+					}
+				}
+				j++;
+			}
+			
+			while(!sign.empty()){	//计算剩余加法 
+				int rhs = num.top();
+				num.pop();
+				int lhs = num.top();
+				num.pop();
+				sign.pop();
+				num.push(rhs + lhs);
+			}
+		
+		int ans = num.top();
+		if(ans == 24){
+			cout<<"Yes"<<endl;
+		}else{
+			cout<<"No"<<endl;
+		}
+	}
+	return 0;
+} 
+*/
+
