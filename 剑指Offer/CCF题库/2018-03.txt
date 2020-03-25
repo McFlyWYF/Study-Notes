@@ -1,0 +1,82 @@
+//2018-03-1
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n = 1,ans = 0,t = 0;
+	while(n){
+		
+		cin>>n;
+		
+		if(n == 1){
+			ans += 1;
+			t = 0;
+		}
+		
+		if(n == 2){
+			t += 2;
+			ans += t;
+		}
+	}
+	
+	cout<<ans<<endl;
+	return 0;
+}*/
+
+/*
+//2018-03-2
+#include<iostream>
+#include<algorithm>
+#define MAX 105
+using namespace std;
+struct Ball{
+	int index;	//序号
+	int order;	//相对位置
+	int pos; 
+}ball[MAX];
+
+bool cmp_order(Ball a,Ball b){
+	return a.pos < b.pos;
+}
+
+bool cmp_index(Ball a,Ball b){
+	return a.index < b.index;
+}
+
+int main()
+{
+	int n,L,t;
+	cin>>n>>L>>t;
+	
+	for(int i = 0;i < n;i++){
+		cin>>ball[i].pos;
+		ball[i].index = i;
+	}
+	
+	int tmp[MAX] = {0};	//tmp[i]为第i个小球在t时间之后的位置
+	for(int i = 0;i < n;i++){
+		tmp[i] = ball[i].pos + t;
+		//计算t施加之后在数轴上的位置
+		//通过判断tmp[i]是奇数个L长度，还是偶数个L长度，计算到零点的距离
+		if((tmp[i] / L) % 2 == 1){
+			tmp[i] = L - tmp[i] % L;
+		} else{
+			tmp[i] = tmp[i] % L;
+		}
+	}
+	
+	sort(tmp,tmp + n);	//按照位置从大到小对这些小球进行排序，由于相对位置不变，tmp[i]表示相对位置为i的小球所在的距离
+	sort(ball,ball + n,cmp_order);	//按照相对位置对原来的小球进行排序
+	
+	for(int i = 0;i < n;i++){
+		ball[i].order = i;
+	} 
+	
+	sort(ball,ball + n,cmp_index);	//还原味按序号排序，按要求输出
+	for(int i = 0;i < n;i++){
+		cout<<tmp[ball[i].order]<<" ";
+	} 
+	
+	return 0;
+}
+*/

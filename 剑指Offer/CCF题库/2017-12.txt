@@ -1,0 +1,72 @@
+//2017-12-1
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n,ans = 100000;
+	cin>>n;
+	int a[n];
+	//输入数值 
+	for(int i = 0;i < n;i++){
+		cin>>a[i];
+	}
+	
+	sort(a,a + n);	//排序 
+	for(int i = 1;i < n;i++){
+		ans = min(ans,a[i] - a[i - 1]);		//相邻两项差值与ans相比较 
+	}
+	
+	cout<<ans<<endl;	
+	return 0;
+}
+
+//2017-12-2
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+#define MAX 1005
+struct List{
+	int no;
+	List *next;
+}node;
+int a[MAX];
+
+int main()
+{
+	int n,k;
+	cin>>n>>k;
+	List *head = NULL;
+	List *pre,*cur;
+	
+	//创建链表，给每个结点赋值 
+	for(int i = 1;i <= n;i++){
+		cur = (List*)malloc(sizeof(node));
+		cur->no = i;
+		cur->next = NULL;
+		if(head == NULL){
+			head = pre = cur;
+		}else{
+			pre->next = cur;
+		}
+		pre = cur;
+	}
+	
+	cur->next = head;
+	int m = 1;
+	pre = cur;
+	cur = head;
+	while(cur != cur->next){
+		if(m % k == 0 || m % 10 == k){
+			pre->next = cur = cur->next;
+		}else{
+			pre = cur;
+			cur = cur->next;
+		}
+		
+		m++;
+	}
+	
+	cout<<cur->no<<endl;
+	return 0; 
+}
