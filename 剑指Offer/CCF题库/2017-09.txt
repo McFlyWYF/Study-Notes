@@ -1,0 +1,97 @@
+//2017-09-1
+#include<iostream>
+using namespace std;
+int main()
+{
+	int N;
+	cin>>N;
+	int ans = 0;
+	
+	int buy5 = N / 50;
+	N = N % 50;
+	int buy3 = N / 30;
+	N = N % 30;
+	
+	cout<<buy5 * 7 + buy3 * 4 + N / 10<<endl;
+}
+*/
+
+/*
+//2017-09-2
+#include<iostream>
+#include<algorithm>
+#include<queue>
+#define MAX 1005
+using namespace std;
+
+struct Tea{
+	int key;
+	int sta;
+	int fin;
+	
+	bool operator <  (const Tea &a) const{	//用于优先队列从小到大排序
+		if(fin == a.fin){
+			return key > a.key;
+		} 
+		return fin > a.fin;
+	}
+}tea[MAX];
+
+int pos[MAX];	//pos[i]：挂钩i上的钥匙编号
+int keypos[MAX];	//钥匙i所在的位置
+priority_queue <int,vector<int>,greater <int> > sparepos;	//挂钩的空位置编号
+priority_queue<Tea> backtea;	//待返还的钥匙
+
+bool teacmp(Tea a,Tea b){
+	return a.sta < b.sta;
+} 
+
+void takekey(Tea tea){
+	sparepos.push(keypos[tea.key]);
+	backtea.push(tea);
+	keypos[tea.key] = 0;
+}
+
+void backkey(Tea tea){
+	keypos[tea.key] = sparepos.top();
+	sparepos.pop();
+	backtea.pop();
+}
+
+int main()
+{
+	int N,K;
+	cin>>N>>K;
+
+	for(int i = 1;i <= N;i++){
+		keypos[i] = i;
+	}
+	
+	for(int i = 0;i < K;i++){
+		cin>>tea[i].key>>tea[i].sta>>tea[i].fin;
+		tea[i].fin += tea[i].sta;
+	}
+	
+	sort(tea,tea + K,teacmp);
+	
+	for(int i = 0;i < K;i++){
+		while(!backtea.empty() && tea[i].sta >= backtea.top().fin){
+			backkey(backtea.top());
+		}
+		takekey(tea[i]);
+	}
+	
+	while(!backtea.empty()){
+		backkey(backtea.top());
+	}
+	
+
+	for(int i = 1;i <= N;i++){
+		pos[keypos[i]] = i;
+	}
+	
+	for(int i = 1;i <= N;i++){
+		cout<<pos[i]<<" ";
+	}
+	return 0;
+}

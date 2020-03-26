@@ -1,0 +1,81 @@
+//2017-03-1
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,k;
+	cin>>n>>k;
+	int a[n],sum = 0,count = 0;
+	
+	for(int i = 0;i < n;i++){
+		cin>>a[i];
+		sum += a[i];
+		if(sum >= k || i == n - 1){		//重量大于等于k或者蛋糕分完 
+			count++;	//人数计数器 
+			sum = 0;	//重置蛋糕重量 
+		}
+	}
+	
+	cout<<count<<endl;
+	return 0;
+}
+*/
+
+/*
+//2017-03-2
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,m,p,q;
+	cin>>n>>m;
+	int a[n],j = 0;
+	
+	for(int i = 1;i <= n;i++){
+		a[j++] = i;
+	}
+	
+	for(int i = 0;i < m;i++){
+		cin>>p>>q;
+		if(q > 0){	//向后移动 
+			int k;
+			for(int i = 0;i < n;i++){
+				if(a[i] == p){	//查找学号为p的同学位置 
+					k = i;	//记录位置 
+				}
+			}
+
+			int temp = a[k];
+			while(q > 0){
+				a[k] = a[k + 1];	//k位后的同学向前移动 
+				k++;
+				q--;
+			}
+			a[k] = temp;	//第k位插入该同学 
+		}
+		
+		if(q < 0){	//向前移动 
+			int k;
+			
+			for(int i = 0;i < n;i++){
+				if(a[i] == p){
+					k = i;
+				}
+			}
+			
+			q = q * (-1);
+			int temp = a[k];
+			while(q > 0){
+				a[k] = a[k - 1];
+				q--;
+				k--;
+			}
+			a[k] = temp;
+		}
+	}
+	
+	for(int i = 0;i < n;i++){
+		cout<<a[i]<<" ";
+	}
+	return 0;
+}
