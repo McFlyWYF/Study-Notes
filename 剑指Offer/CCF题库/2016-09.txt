@@ -1,0 +1,105 @@
+//2016-09-1
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,k = 0;
+	cin>>n;
+ 	int a[n],b[n - 1];
+ 	
+	for(int i = 0;i < n;i++){
+		cin>>a[i];
+	}
+	
+	for(int i = 0;i < n - 1;i++){
+		if(a[i + 1] - a[i] < 0){
+			b[k++] = (a[i + 1] - a[i]) * (-1);
+		}
+		if(a[i + 1] - a[i] > 0){
+			b[k++] = a[i + 1] - a[i];
+		}
+	}
+	
+	int max = b[0];
+	for(int i = 0;i < k;i++){
+		if(max < b[i]){
+			max = b[i];
+		}
+	}
+	cout<<max<<endl;
+	return 0;
+}*/
+
+/*
+//满分代码
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+int main()
+{
+	int n,d;
+	cin>>n;
+	int a[n];
+	cin>>a[0];
+	int ans = 0;
+	for(int i = 1;i < n;i++){
+		cin>>a[i];
+		d = abs(a[i] - a[i - 1]);
+		if(ans < d){
+			ans = d;
+		}
+	}
+	
+	cout<<ans<<endl;
+	return 0;
+} 
+*/
+
+/*
+//2016-09-2 
+#include<iostream>
+using namespace std;
+
+int sets[20];	//每一排空缺的座位个数
+int n,p;
+ 
+int main()
+{
+	for(int j = 0;j < 20;j++){	//初试时每排5个座位都空缺 
+		sets[j] = 5;
+	}
+	
+	cin>>n;
+	
+	for(int i = 0;i < n;i++){
+		cin>>p;
+		for(int j = 0;p && j < 20;j++){		//遍历所有排，是否有空缺
+			if(sets[j] >= p){
+				for(int k = 1;k <= p;k++){
+					cout<<j * 5 + 5 - sets[j] + k<<" ";
+				}
+				sets[j] -= p;  //减去已经安排的座位
+				p = 0; 
+			} 
+		}
+		
+		//此时，要分配不相邻的座位，且任一排无法完全容纳p个人
+		for(int j = 0;p && j < 20;j++){		//遍历所有排，查询是否空缺 
+			if(sets[j] > 0){
+				for(int k = 1;k <= sets[j];k++){	//装满当前排 
+					cout<<j * 5 + 5 - sets[j] + k<<" ";
+				}
+				if(p >= sets[j]){	//如果p大于等于当前排的空缺数，则先分配sets[j]个座位 
+					p -= sets[j];
+					sets[j] = 0;
+				}
+				else{	//反之全部分配
+					sets[j] -= p;
+					p = 0; 
+				}
+			}
+		}
+		cout<<endl; 
+	}
+	return 0;
+}
